@@ -37,7 +37,7 @@
                     <children>
                         <VBox spacing="10.0">
                             <children>
-                                <Label text="Tên đăng nhập:">
+                                <Label text="Tên đăng nhập của tôi:">
                                     <font>
                                         <Font name="Times New Roman" size="20.0" />
                                     </font>
