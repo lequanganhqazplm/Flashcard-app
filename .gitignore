@@ -1,0 +1,12 @@
+target/
+bin/
+out/
+
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+
+*.sqlite
+*.db

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="738.0" prefWidth="696.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.ReviewTopicController">
+   <children>
+      <VBox alignment="CENTER" maxHeight="800.0" maxWidth="520.0" minHeight="600.0" minWidth="350.0" prefHeight="682.0" prefWidth="436.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.12), 25, 0, 0, 6);" StackPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         <children>
+            <HBox prefHeight="54.0" prefWidth="440.0" spacing="20.0">
+               <children>
+                  <TextField fx:id="searchField" alignment="TOP_LEFT" prefHeight="38.0" prefWidth="352.0" promptText="Tìm tên chủ đề ôn tập " style="-fx-background-radius: 20;">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="150.0" style="-fx-background-color: #8E62A6; -fx-background-radius: 40;" text="Tìm kiếm" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman Bold" size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <StackPane prefHeight="520.0" prefWidth="200.0">
+               <children>
+                  <ListView fx:id="topicListView" prefHeight="379.0" prefWidth="520.0" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 15px;" />
+               </children>
+            </StackPane>
+            <VBox alignment="CENTER" prefHeight="38.0" prefWidth="440.0">
+               <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #8E62A6; -fx-text-fill: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.4), 10, 0, 0, 3);" text="Quay lại">
+                     <font>
+                        <Font name="Times New Roman Bold" size="19.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="60.0" right="60.0" top="30.0" />
+   </padding>
+</StackPane>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.MainMenuController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <children>
+                <Button onAction="#backToMainMenu" styleClass="secondary-button" text="← Quay lại" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label style="-fx-font-weight: bold; -fx-font-size: 18;" text="Học tập" textFill="WHITE" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="logoutButton" onAction="#handleLogout" styleClass="logout-button" text="Đăng xuất" />
+            </children>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="30" style="-fx-padding: 40;">
+            <children>
+                <!-- Timer ở góc trên phải -->
+                <HBox alignment="TOP_RIGHT" VBox.vgrow="NEVER">
+                    <children>
+                        <VBox alignment="CENTER_RIGHT" spacing="5" style="-fx-background-color: rgba(44, 62, 80, 0.9);                                      -fx-padding: 10 15;                                      -fx-background-radius: 10;">
+                            <children>
+                                <Label fx:id="timerDisplayLabel" style="-fx-font-size: 24;                                               -fx-font-weight: bold;                                               -fx-text-fill: #e74c3c;" text="05:00" />
+                                <Label style="-fx-font-size: 10;                                               -fx-text-fill: white;" text="⏱ Tự động 5 phút" />
+                            </children>
+                        </VBox>
+                    </children>
+                    <padding>
+                        <Insets right="10" top="-30" />
+                    </padding>
+                </HBox>
+
+                <Label style="-fx-font-size: 20;" text="CHẠM VÀO THẺ ĐỂ LẬT" />
+
+                <StackPane fx:id="flashcardPane" maxWidth="450.0" onMouseClicked="#handleFlipCard" prefHeight="280.0" prefWidth="450.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5);">
+                    <children>
+                        <VBox fx:id="frontCard" alignment="CENTER">
+                            <children>
+                                <Label style="-fx-text-fill: gray; -fx-font-size: 12;" text="MẶT TRƯỚC" />
+                                <Label fx:id="reviewVocabLabel" style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #2980b9;" text="Word" textAlignment="CENTER" wrapText="true" />
+                            </children>
+                        </VBox>
+                        <VBox fx:id="backCard" alignment="CENTER" visible="false">
+                            <children>
+                                <Label style="-fx-text-fill: gray; -fx-font-size: 12;" text="MẶT SAU" />
+                                <Label fx:id="reviewDefLabel" style="-fx-font-size: 28; -fx-text-fill: #27ae60;" text="Definition" textAlignment="CENTER" wrapText="true" />
+                            </children>
+                        </VBox>
+                    </children>
+                </StackPane>
+
+                <HBox alignment="CENTER" spacing="15">
+                    <children>
+                        <Button onAction="#handleRestartStudy" styleClass="warning-button" text="🔄 Học lại" />
+                        <Button onAction="#handleMarkLearnedInStudy" styleClass="success-button" text="✔ Đã thuộc" />
+                        <Button onAction="#handleNextCard" styleClass="secondary-button" text="Tiếp theo ➔" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </center>
+
+</BorderPane>

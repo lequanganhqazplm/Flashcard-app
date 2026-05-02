@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane prefHeight="750.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.VocabularyOfTopicController">
+   <children>
+      <VBox alignment="CENTER" maxWidth="700.0" minWidth="500.0" prefWidth="650.0" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.12), 25, 0, 0, 6);" StackPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+         <children>
+            <HBox prefHeight="50.0" prefWidth="440.0">
+               <children>
+                  <Text fx:id="textLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="Tên chủ đề">
+                     <font>
+                        <Font name="Times New Roman Bold" size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </HBox>
+
+            <VBox spacing="10.0">
+               <children>
+                  <HBox spacing="15.0">
+                     <children>
+                        <VBox HBox.hgrow="ALWAYS">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Từ vựng">
+                                 <font> <Font name="Times New Roman" size="18.0" /> </font>
+                              </Text>
+                              <TextField fx:id="newVocabField" prefHeight="36.0" promptText="Nhập từ mới" style="-fx-background-radius: 15;" />
+                           </children>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nghĩa">
+                                 <font> <Font name="Times New Roman" size="18.0" /> </font>
+                              </Text>
+                              <TextField fx:id="newDefinitionField" prefHeight="36.0" promptText="Nhập nghĩa" style="-fx-background-radius: 15;" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT">
+                     <children>
+                        <Button fx:id="addVocabButton" mnemonicParsing="false" onAction="#handleAddVocab" style="-fx-background-color: #8E62A6; -fx-background-radius: 20;" text="+ Thêm từ" textFill="WHITE">
+                           <font> <Font name="Times New Roman Bold" size="16.0" /> </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <TextField fx:id="searchVocabField" prefHeight="40.0" promptText="🔍 Tìm kiếm từ vựng..." style="-fx-background-radius: 20; -fx-padding: 0 15 0 15;">
+               <font> <Font size="16.0" /> </font>
+            </TextField>
+
+            <HBox spacing="15.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <TableView fx:id="vocabTable" prefHeight="300.0" style="-fx-background-radius: 10;" HBox.hgrow="ALWAYS">
+                     <columns>
+                        <TableColumn fx:id="vocabCol" prefWidth="150.0" style="-fx-font-size: 16px; -fx-background-color: white;" text="Từ vựng" />
+                        <TableColumn fx:id="defCol" prefWidth="250.0" style="-fx-font-size: 16px; -fx-background-color: white;" text="Nghĩa" />
+                     </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+
+                  <VBox spacing="15.0" alignment="TOP_CENTER" minWidth="120.0">
+                     <children>
+                        <Button fx:id="updateVocabButton" mnemonicParsing="false" onAction="#handleUpdateVocab" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #8E62A6; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);" text="Sửa từ" textFill="WHITE">
+                           <font> <Font name="Times New Roman Bold" size="16.0" /> </font>
+                        </Button>
+                        <Button fx:id="deleteVocabButton" mnemonicParsing="false" onAction="#handleDeleteVocab" prefHeight="40.0" prefWidth="110.0" style="-fx-background-color: #8E62A6; -fx-background-radius: 10; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);" text="Xóa từ" textFill="WHITE">
+                           <font> <Font name="Times New Roman Bold" size="16.0" /> </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" spacing="20.0">
+               <children>
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#handleBack" prefHeight="40.0" style="-fx-background-color: #8E62A6; -fx-background-radius: 10;" text="⬅ Quay lại" textFill="WHITE">
+                     <font> <Font name="Times New Roman Bold" size="16.0" /> </font>
+                  </Button>
+
+                  <Region HBox.hgrow="ALWAYS" />
+
+                  <Button fx:id="deleteTopicButton" mnemonicParsing="false" onAction="#handleDeleteTopic" prefHeight="40.0" style="-fx-background-color: #E74C3C; -fx-background-radius: 10;" text="Xóa Chủ đề này" textFill="WHITE">
+                     <font> <Font name="Times New Roman Bold" size="16.0" /> </font>
+                  </Button>
+               </children>
+            </HBox>
+
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+   </padding>
+</StackPane>
