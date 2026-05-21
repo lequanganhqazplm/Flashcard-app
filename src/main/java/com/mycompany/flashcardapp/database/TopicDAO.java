@@ -1,42 +1,53 @@
 package com.mycompany.flashcardapp.database;
 
 import com.mycompany.flashcardapp.model.Topic;
+import com.mycompany.flashcardapp.model.Flashcard;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class TopicDAO {
 
-    private final Connection connection;
+    private static final String FILE_NAME = "topics.dat";
 
     public TopicDAO() {
-        this.connection = DatabaseConnection.getInstance().getConnection();
+        FileDataManager.loadList(FILE_NAME);
+    }
+
+    private List<Topic> getTopics() {
+        return FileDataManager.loadList(FILE_NAME);
+    }
+
+    private void saveTopics(List<Topic> topics) {
+        FileDataManager.saveList(FILE_NAME, topics);
+    }
+
+    private int getNextId(List<Topic> topics) {
+        return topics.stream().mapToInt(Topic::getId).max().orElse(0) + 1;
+    }
+
+    // Helper: update flashcard count dynamically since we no longer have JOINs
+    private int getFlashcardCount(int topicId) {
+        List<Flashcard> flashcards = FileDataManager.loadList("flashcards.dat");
+        return (int) flashcards.stream().filter(f -> f.getTopicId() != null && f.getTopicId() == topicId).count();
     }
 
     public boolean addTopic(int userId, String name) {
         if (name == null || name.trim().isEmpty()) {
             return false;
         }
-
-        String sql = "INSERT INTO topics (user_id, name) VALUES (?, ?)";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            pstmt.setString(2, name.trim());
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            if (e.getMessage().contains("UNIQUE")) {
-                System.err.println("Topic '" + name + "' already exists for this user!");
-            } else {
-                System.err.println("Failed to add topic!");
-                e.printStackTrace();
-            }
+        if (topicExists(userId, name.trim())) {
+            System.err.println("Topic '" + name + "' already exists for this user!");
             return false;
         }
+
+        List<Topic> topics = getTopics();
+        int newId = getNextId(topics);
+        Topic newTopic = new Topic(newId, userId, name.trim(), 0);
+        topics.add(newTopic);
+        saveTopics(topics);
+        return true;
     }
 
     public boolean updateTopic(int topicId, String newName) {
@@ -44,118 +55,67 @@ public class TopicDAO {
             return false;
         }
 
-        String sql = "UPDATE topics SET name = ? WHERE id = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setString(1, newName.trim());
-            pstmt.setInt(2, topicId);
-            pstmt.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Failed to update topic!");
-            e.printStackTrace();
-            return false;
+        List<Topic> topics = getTopics();
+        for (Topic t : topics) {
+            if (t.getId() == topicId) {
+                t.setName(newName.trim());
+                saveTopics(topics);
+                return true;
+            }
         }
+        return false;
     }
 
     public boolean deleteTopic(int topicId) {
-        // First, set all flashcards with this topic_id to NULL
-        String updateFlashcardsSQL = "UPDATE flashcards SET topic_id = NULL WHERE topic_id = ?";
-        String deleteSQL = "DELETE FROM topics WHERE id = ?";
-
-        try {
-            // Update flashcards first
-            try (PreparedStatement pstmt = connection.prepareStatement(updateFlashcardsSQL)) {
-                pstmt.setInt(1, topicId);
-                pstmt.executeUpdate();
+        // Set all flashcards with this topic_id to null
+        List<Flashcard> flashcards = FileDataManager.loadList("flashcards.dat");
+        boolean fChanged = false;
+        for (Flashcard f : flashcards) {
+            if (f.getTopicId() != null && f.getTopicId() == topicId) {
+                f.setTopicId(null);
+                f.setTopicName("No Topic");
+                fChanged = true;
             }
-
-            // Then delete the topic
-            try (PreparedStatement pstmt = connection.prepareStatement(deleteSQL)) {
-                pstmt.setInt(1, topicId);
-                pstmt.executeUpdate();
-            }
-
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Failed to delete topic!");
-            e.printStackTrace();
-            return false;
         }
+        if (fChanged) {
+            FileDataManager.saveList("flashcards.dat", flashcards);
+        }
+
+        // Delete topic
+        List<Topic> topics = getTopics();
+        boolean removed = topics.removeIf(t -> t.getId() == topicId);
+        if (removed) {
+            saveTopics(topics);
+        }
+        return removed;
     }
 
     public List<Topic> getAllTopics(int userId) {
-        List<Topic> topics = new ArrayList<>();
-        String sql = """
-                    SELECT t.id, t.user_id, t.name,
-                           COUNT(f.id) as flashcard_count
-                    FROM topics t
-                    LEFT JOIN flashcards f ON t.id = f.topic_id
-                    WHERE t.user_id = ?
-                    GROUP BY t.id, t.user_id, t.name
-                    ORDER BY t.name
-                """;
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            ResultSet rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                Topic topic = new Topic(
-                        rs.getInt("id"),
-                        rs.getInt("user_id"),
-                        rs.getString("name"),
-                        rs.getInt("flashcard_count"));
-                topics.add(topic);
-            }
-        } catch (SQLException e) {
-            System.err.println("Failed to get topics!");
-            e.printStackTrace();
-        }
-
-        return topics;
+        List<Topic> topics = getTopics();
+        return topics.stream()
+                .filter(t -> t.getUserId() == userId)
+                .map(t -> {
+                    t.setFlashcardCount(getFlashcardCount(t.getId()));
+                    return t;
+                })
+                .sorted((t1, t2) -> t1.getName().compareToIgnoreCase(t2.getName()))
+                .collect(Collectors.toList());
     }
 
     public Topic getTopicByName(int userId, String name) {
-        String sql = """
-                    SELECT t.id, t.user_id, t.name,
-                           COUNT(f.id) as flashcard_count
-                    FROM topics t
-                    LEFT JOIN flashcards f ON t.id = f.topic_id
-                    WHERE t.user_id = ? AND t.name = ?
-                    GROUP BY t.id, t.user_id, t.name
-                """;
-
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            pstmt.setString(2, name);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return new Topic(
-                        rs.getInt("id"),
-                        rs.getInt("user_id"),
-                        rs.getString("name"),
-                        rs.getInt("flashcard_count"));
-            }
-        } catch (SQLException e) {
-            System.err.println("Failed to get topic by name!");
-            e.printStackTrace();
-        }
-
-        return null;
+        List<Topic> topics = getTopics();
+        return topics.stream()
+                .filter(t -> t.getUserId() == userId && t.getName().equals(name))
+                .map(t -> {
+                    t.setFlashcardCount(getFlashcardCount(t.getId()));
+                    return t;
+                })
+                .findFirst()
+                .orElse(null);
     }
 
     public boolean topicExists(int userId, String name) {
-        String sql = "SELECT COUNT(*) FROM topics WHERE user_id = ? AND name = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            pstmt.setString(2, name);
-            ResultSet rs = pstmt.executeQuery();
-            return rs.next() && rs.getInt(1) > 0;
-        } catch (SQLException e) {
-            System.err.println("Failed to check topic existence!");
-            e.printStackTrace();
-            return false;
-        }
+        List<Topic> topics = getTopics();
+        return topics.stream().anyMatch(t -> t.getUserId() == userId && t.getName().equals(name));
     }
 }

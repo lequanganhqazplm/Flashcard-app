@@ -2,77 +2,44 @@ package com.mycompany.flashcardapp.database;
 
 import com.mycompany.flashcardapp.model.Streak;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.Optional;
 
 public class StreakDAO {
-    private final Connection connection;
+    private static final String FILE_NAME = "streaks.dat";
 
     public StreakDAO() {
-        this.connection = DatabaseConnection.getInstance().getConnection();
-        ensureTableExists();
+        FileDataManager.loadList(FILE_NAME);
     }
 
-    public void ensureTableExists() {
-        String sql = """
-                CREATE TABLE IF NOT EXISTS streaks (
-                    user_id INTEGER PRIMARY KEY,
-                    current_streak INTEGER DEFAULT 0,
-                    longest_streak INTEGER DEFAULT 0,
-                    last_completed_at TEXT,
-                    freeze_count INTEGER DEFAULT 0,
-                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-                )
-                """;
-        try (Statement stmt = connection.createStatement()) {
-            stmt.execute(sql);
-        } catch (SQLException e) {
-            System.err.println("Lỗi khi tạo bảng streaks: " + e.getMessage());
-        }
+    private List<Streak> getStreaks() {
+        return FileDataManager.loadList(FILE_NAME);
+    }
+
+    private void saveStreaks(List<Streak> streaks) {
+        FileDataManager.saveList(FILE_NAME, streaks);
     }
 
     public Streak getUserStreak(int userId) {
-        String sql = "SELECT * FROM streaks WHERE user_id = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return new Streak(
-                        rs.getInt("user_id"),
-                        rs.getInt("current_streak"),
-                        rs.getInt("longest_streak"),
-                        rs.getString("last_completed_at"),
-                        rs.getInt("freeze_count"));
-            }
-        } catch (SQLException e) {
-            System.err.println("Lỗi khi lấy streak: " + e.getMessage());
-        }
-        return null;
+        List<Streak> streaks = getStreaks();
+        return streaks.stream().filter(s -> s.getUserId() == userId).findFirst().orElse(null);
     }
 
     public boolean createDefaultStreak(int userId) {
-        String sql = "INSERT OR IGNORE INTO streaks (user_id, current_streak, longest_streak, last_completed_at, freeze_count) "
-                +
-                "VALUES (?, 0, 0, NULL, 2)";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, userId);
-            pstmt.executeUpdate();
+        List<Streak> streaks = getStreaks();
+        if (streaks.stream().noneMatch(s -> s.getUserId() == userId)) {
+            Streak newStreak = new Streak(userId, 0, 0, null, 2);
+            streaks.add(newStreak);
+            saveStreaks(streaks);
             System.out.println("✓ Created default streak for user " + userId);
             return true;
-        } catch (SQLException e) {
-            System.err.println("Lỗi khi tạo streak mặc định: " + e.getMessage());
-            return false;
         }
+        return false;
     }
 
     public boolean updateStreak(int userId) {
-        // Đảm bảo có bản ghi streak cho user
         Streak streak = getUserStreak(userId);
         if (streak == null) {
             createDefaultStreak(userId);
@@ -141,21 +108,18 @@ public class StreakDAO {
     }
 
     private boolean saveStreak(Streak streak) {
-        String sql = "UPDATE streaks SET current_streak = ?, longest_streak = ?, last_completed_at = ?, freeze_count = ? "
-                +
-                "WHERE user_id = ?";
-        try (PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            pstmt.setInt(1, streak.getCurrentStreak());
-            pstmt.setInt(2, streak.getLongestStreak());
-            pstmt.setString(3, streak.getLastCompletedAt());
-            pstmt.setInt(4, streak.getFreezeCount());
-            pstmt.setInt(5, streak.getUserId());
-            pstmt.executeUpdate();
-            System.out.println("✓ Streak đã được lưu");
-            return true;
-        } catch (SQLException e) {
-            System.err.println("Lỗi khi lưu streak: " + e.getMessage());
-            return false;
+        List<Streak> streaks = getStreaks();
+        for (int i = 0; i < streaks.size(); i++) {
+            if (streaks.get(i).getUserId() == streak.getUserId()) {
+                streaks.set(i, streak);
+                saveStreaks(streaks);
+                System.out.println("✓ Streak đã được lưu");
+                return true;
+            }
         }
+        // If not found (shouldn't happen here normally but just in case)
+        streaks.add(streak);
+        saveStreaks(streaks);
+        return true;
     }
 }

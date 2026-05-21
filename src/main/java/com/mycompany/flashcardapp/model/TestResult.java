@@ -2,8 +2,10 @@ package com.mycompany.flashcardapp.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
-public class TestResult {
+public class TestResult implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int id;
     private int userId;
     private String testType; // random or topic test

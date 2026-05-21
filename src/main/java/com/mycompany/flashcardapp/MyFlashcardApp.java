@@ -4,7 +4,6 @@
 
 package com.mycompany.flashcardapp;
 
-import com.mycompany.flashcardapp.database.DatabaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,7 +23,6 @@ public class MyFlashcardApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            DatabaseConnection.getInstance();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Welcome.fxml"));
             Parent root = loader.load();
 
