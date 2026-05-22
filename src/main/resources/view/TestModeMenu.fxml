@@ -27,41 +27,49 @@
 
                 <VBox alignment="CENTER" spacing="20.0">
                     <children>
-                        <HBox fx:id="topicTestBox" alignment="CENTER_LEFT" onMouseClicked="#handleTopicTest" prefHeight="90.0" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #F7FAFC; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-cursor: hand; -fx-padding: 0 20;">
+                        <VBox fx:id="topicTestBox" onMouseClicked="#handleTopicTest" style="-fx-cursor: hand;">
                             <children>
-                                <StackPane prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #EBF8FF; -fx-background-radius: 25;">
-                                    <Label text="📚" textFill="#3182CE">
-                                        <font><Font size="24.0" /></font>
-                                    </Label>
-                                </StackPane>
-                                <VBox alignment="CENTER_LEFT" spacing="2">
-                                    <Label text="Kiểm Tra Theo Chủ Đề" textFill="#2D3748">
-                                        <font> <Font name="System Bold" size="18.0" /> </font>
-                                    </Label>
-                                    <Label text="Lựa chọn một bộ từ vựng cụ thể" textFill="#A0AEC0">
-                                        <font> <Font size="13.0" /> </font>
-                                    </Label>
-                                </VBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #F7FAFC; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 0 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 10, 0, 0, 3);">
+                                    <children>
+                                        <StackPane prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #EBF8FF; -fx-background-radius: 25;">
+                                            <Label text="📚" textFill="#3182CE">
+                                                <font><Font size="24.0" /></font>
+                                            </Label>
+                                        </StackPane>
+                                        <VBox alignment="CENTER_LEFT" spacing="2">
+                                            <Label text="Kiểm Tra Theo Chủ Đề" textFill="#2D3748">
+                                                <font> <Font name="System Bold" size="18.0" /> </font>
+                                            </Label>
+                                            <Label text="Lựa chọn một bộ từ vựng cụ thể" textFill="#A0AEC0">
+                                                <font> <Font size="13.0" /> </font>
+                                            </Label>
+                                        </VBox>
+                                    </children>
+                                </HBox>
                             </children>
-                        </HBox>
+                        </VBox>
 
-                        <HBox fx:id="randomTestBox" alignment="CENTER_LEFT" onMouseClicked="#handleRandomTest" prefHeight="90.0" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #F7FAFC; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-cursor: hand; -fx-padding: 0 20;">
+                        <VBox fx:id="randomTestBox" onMouseClicked="#handleRandomTest" style="-fx-cursor: hand;">
                             <children>
-                                <StackPane prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #F0FFF4; -fx-background-radius: 25;">
-                                    <Label text="🎲" textFill="#38A169">
-                                        <font><Font size="24.0" /></font>
-                                    </Label>
-                                </StackPane>
-                                <VBox alignment="CENTER_LEFT" spacing="2">
-                                    <Label text="Kiểm Tra Ngẫu Nhiên" textFill="#2D3748">
-                                        <font> <Font name="System Bold" size="18.0" /> </font>
-                                    </Label>
-                                    <Label text="Thử thách với các từ vựng ngẫu nhiên" textFill="#A0AEC0">
-                                        <font> <Font size="13.0" /> </font>
-                                    </Label>
-                                </VBox>
+                                <HBox alignment="CENTER_LEFT" prefHeight="90.0" prefWidth="450.0" spacing="20.0" style="-fx-background-color: #F7FAFC; -fx-border-color: #E2E8F0; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 0 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.03), 10, 0, 0, 3);">
+                                    <children>
+                                        <StackPane prefHeight="50.0" prefWidth="50.0" style="-fx-background-color: #F0FFF4; -fx-background-radius: 25;">
+                                            <Label text="🎲" textFill="#38A169">
+                                                <font><Font size="24.0" /></font>
+                                            </Label>
+                                        </StackPane>
+                                        <VBox alignment="CENTER_LEFT" spacing="2">
+                                            <Label text="Kiểm Tra Ngẫu Nhiên" textFill="#2D3748">
+                                                <font> <Font name="System Bold" size="18.0" /> </font>
+                                            </Label>
+                                            <Label text="Thử thách với các từ vựng ngẫu nhiên" textFill="#A0AEC0">
+                                                <font> <Font size="13.0" /> </font>
+                                            </Label>
+                                        </VBox>
+                                    </children>
+                                </HBox>
                             </children>
-                        </HBox>
+                        </VBox>
                     </children>
                 </VBox>
 
