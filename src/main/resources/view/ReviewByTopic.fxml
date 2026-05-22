@@ -9,51 +9,47 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="738.0" prefWidth="696.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.ReviewTopicController">
+<StackPane prefHeight="738.0" prefWidth="760.0" style="-fx-background-color: transparent; -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.ReviewTopicController">
    <children>
-      <VBox alignment="CENTER" maxHeight="800.0" maxWidth="520.0" minHeight="600.0" minWidth="350.0" prefHeight="682.0" prefWidth="436.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.12), 25, 0, 0, 6);" StackPane.alignment="CENTER">
+      <VBox alignment="CENTER" maxWidth="600.0" minWidth="400.0" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 15, 0, 0, 4);" StackPane.alignment="CENTER">
          <padding>
-            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+            <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
          </padding>
          <children>
-            <HBox prefHeight="54.0" prefWidth="440.0" spacing="20.0">
+            <HBox alignment="CENTER" spacing="15.0">
                <children>
-                  <TextField fx:id="searchField" alignment="TOP_LEFT" prefHeight="38.0" prefWidth="352.0" promptText="Tìm tên chủ đề ôn tập " style="-fx-background-radius: 20;">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
+                  <TextField fx:id="searchField" prefHeight="42.0" promptText="🔍 Tìm tên chủ đề ôn tập..." style="-fx-background-color: #f8fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 0 15;" HBox.hgrow="ALWAYS">
                      <font>
-                        <Font size="16.0" />
+                        <Font size="14.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="150.0" style="-fx-background-color: #8E62A6; -fx-background-radius: 40;" text="Tìm kiếm" textFill="WHITE">
+                  <Button fx:id="searchButton" mnemonicParsing="false" prefHeight="42.0" prefWidth="120.0" style="-fx-background-color: #4A90E2; -fx-background-radius: 8; -fx-cursor: hand;" text="Tìm kiếm" textFill="WHITE">
                      <font>
-                        <Font name="Times New Roman Bold" size="18.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
             </HBox>
-            <StackPane prefHeight="520.0" prefWidth="200.0">
+
+            <StackPane prefHeight="450.0">
                <children>
-                  <ListView fx:id="topicListView" prefHeight="379.0" prefWidth="520.0" style="-fx-background-color: white; -fx-border-color: #E0E0E0; -fx-border-radius: 10; -fx-background-radius: 10; -fx-font-size: 15px;" />
+                  <ListView fx:id="topicListView" style="-fx-background-color: white; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 15px; -fx-padding: 5;" />
                </children>
             </StackPane>
-            <VBox alignment="CENTER" prefHeight="38.0" prefWidth="440.0">
+
+            <HBox alignment="CENTER_LEFT">
                <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" prefHeight="41.0" prefWidth="146.0" style="-fx-background-color: #8E62A6; -fx-text-fill: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(102, 126, 234, 0.4), 10, 0, 0, 3);" text="Quay lại">
+                  <Button fx:id="backButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #e2e8f0; -fx-text-fill: #4a5568; -fx-background-radius: 8; -fx-cursor: hand;" text="← Quay lại">
                      <font>
-                        <Font name="Times New Roman Bold" size="19.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                </children>
-            </VBox>
+            </HBox>
          </children>
       </VBox>
    </children>
    <padding>
-      <Insets bottom="30.0" left="60.0" right="60.0" top="30.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
 </StackPane>
