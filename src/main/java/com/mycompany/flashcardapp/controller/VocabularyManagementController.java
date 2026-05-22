@@ -1,6 +1,6 @@
 package com.mycompany.flashcardapp.controller;
 
-import com.mycompany.flashcardapp.database.TopicDAO;
+import com.mycompany.flashcardapp.storage.TopicDAO;
 import com.mycompany.flashcardapp.model.Topic;
 import com.mycompany.flashcardapp.model.User;
 import javafx.collections.FXCollections;

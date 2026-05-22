@@ -1,8 +1,8 @@
 package com.mycompany.flashcardapp.controller;
 
-import com.mycompany.flashcardapp.database.FlashcardDAO;
-import com.mycompany.flashcardapp.database.StreakDAO;
-import com.mycompany.flashcardapp.database.TestResultDAO;
+import com.mycompany.flashcardapp.storage.FlashcardDAO;
+import com.mycompany.flashcardapp.storage.StreakDAO;
+import com.mycompany.flashcardapp.storage.TestResultDAO;
 import com.mycompany.flashcardapp.model.Flashcard;
 import com.mycompany.flashcardapp.model.TestResult;
 import javafx.application.Platform;

@@ -1,6 +1,9 @@
 package com.mycompany.flashcardapp.model;
 
-public class Streak {
+import java.io.Serializable;
+
+public class Streak implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int userId;
     private int currentStreak;
     private int longestStreak;

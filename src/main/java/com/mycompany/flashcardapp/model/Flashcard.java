@@ -2,14 +2,19 @@ package com.mycompany.flashcardapp.model;
 
 import javafx.beans.property.*;
 
-public class Flashcard {
-    private final IntegerProperty id;
-    private final IntegerProperty userId;
-    private final StringProperty vocabulary;
-    private final StringProperty definition;
-    private final IntegerProperty topicId; // Foreign key to topics table
-    private final StringProperty topicName; // For display purposes (not stored in DB)
-    private final BooleanProperty isLearned;
+import java.io.IOException;
+import java.io.Serializable;
+
+public class Flashcard implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private transient IntegerProperty id;
+    private transient IntegerProperty userId;
+    private transient StringProperty vocabulary;
+    private transient StringProperty definition;
+    private transient IntegerProperty topicId; // Foreign key to topics table
+    private transient StringProperty topicName; // For display purposes (not stored in DB)
+    private transient BooleanProperty isLearned;
 
     public Flashcard() {
         this(0, 0, "", "", null, "", false);
@@ -106,5 +111,36 @@ public class Flashcard {
                 ", topicName='" + getTopicName() + '\'' +
                 ", isLearned=" + isLearned() +
                 '}';
+    }
+
+    private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        out.writeInt(getId());
+        out.writeInt(getUserId());
+        out.writeUTF(getVocabulary() != null ? getVocabulary() : "");
+        out.writeUTF(getDefinition() != null ? getDefinition() : "");
+        Integer tId = getTopicId();
+        out.writeObject(tId);
+        out.writeUTF(getTopicName() != null ? getTopicName() : "");
+        out.writeBoolean(isLearned());
+    }
+
+    private void readObject(java.io.ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        int idVal = in.readInt();
+        int userIdVal = in.readInt();
+        String vocabVal = in.readUTF();
+        String defVal = in.readUTF();
+        Integer tIdVal = (Integer) in.readObject();
+        String topicNameVal = in.readUTF();
+        boolean isLearnedVal = in.readBoolean();
+
+        this.id = new SimpleIntegerProperty(idVal);
+        this.userId = new SimpleIntegerProperty(userIdVal);
+        this.vocabulary = new SimpleStringProperty(vocabVal);
+        this.definition = new SimpleStringProperty(defVal);
+        this.topicId = new SimpleIntegerProperty(tIdVal != null ? tIdVal : 0);
+        this.topicName = new SimpleStringProperty(topicNameVal);
+        this.isLearned = new SimpleBooleanProperty(isLearnedVal);
     }
 }

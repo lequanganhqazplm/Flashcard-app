@@ -1,6 +1,6 @@
 package com.mycompany.flashcardapp.controller;
 
-import com.mycompany.flashcardapp.database.FlashcardDAO;
+import com.mycompany.flashcardapp.storage.FlashcardDAO;
 import com.mycompany.flashcardapp.model.Flashcard;
 import com.mycompany.flashcardapp.model.Topic;
 import javafx.event.ActionEvent;
