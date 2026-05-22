@@ -1,4 +1,4 @@
-package com.mycompany.flashcardapp.database;
+package com.mycompany.flashcardapp.storage;
 
 import com.mycompany.flashcardapp.model.User;
 import com.mycompany.flashcardapp.constant.ErrorMessage;
@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 public class UserDAO {
-    private static final String FILE_NAME = "users.dat";
+    private static final String FILE_NAME = "users.bin";
     private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     // Temporary in-memory storage for OTP since it expires quickly

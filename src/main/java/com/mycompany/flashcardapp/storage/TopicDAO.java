@@ -1,4 +1,4 @@
-package com.mycompany.flashcardapp.database;
+package com.mycompany.flashcardapp.storage;
 
 import com.mycompany.flashcardapp.model.Topic;
 import com.mycompany.flashcardapp.model.Flashcard;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class TopicDAO {
 
-    private static final String FILE_NAME = "topics.dat";
+    private static final String FILE_NAME = "topics.bin";
 
     public TopicDAO() {
         FileDataManager.loadList(FILE_NAME);
@@ -29,7 +29,7 @@ public class TopicDAO {
 
     // Helper: update flashcard count dynamically since we no longer have JOINs
     private int getFlashcardCount(int topicId) {
-        List<Flashcard> flashcards = FileDataManager.loadList("flashcards.dat");
+        List<Flashcard> flashcards = FileDataManager.loadList("flashcards.bin");
         return (int) flashcards.stream().filter(f -> f.getTopicId() != null && f.getTopicId() == topicId).count();
     }
 
@@ -68,7 +68,7 @@ public class TopicDAO {
 
     public boolean deleteTopic(int topicId) {
         // Set all flashcards with this topic_id to null
-        List<Flashcard> flashcards = FileDataManager.loadList("flashcards.dat");
+        List<Flashcard> flashcards = FileDataManager.loadList("flashcards.bin");
         boolean fChanged = false;
         for (Flashcard f : flashcards) {
             if (f.getTopicId() != null && f.getTopicId() == topicId) {
@@ -78,7 +78,7 @@ public class TopicDAO {
             }
         }
         if (fChanged) {
-            FileDataManager.saveList("flashcards.dat", flashcards);
+            FileDataManager.saveList("flashcards.bin", flashcards);
         }
 
         // Delete topic

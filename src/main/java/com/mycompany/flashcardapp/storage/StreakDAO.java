@@ -1,4 +1,4 @@
-package com.mycompany.flashcardapp.database;
+package com.mycompany.flashcardapp.storage;
 
 import com.mycompany.flashcardapp.model.Streak;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class StreakDAO {
-    private static final String FILE_NAME = "streaks.dat";
+    private static final String FILE_NAME = "streaks.bin";
 
     public StreakDAO() {
         FileDataManager.loadList(FILE_NAME);

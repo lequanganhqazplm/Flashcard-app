@@ -1,4 +1,4 @@
-package com.mycompany.flashcardapp.database;
+package com.mycompany.flashcardapp.storage;
 
 import com.mycompany.flashcardapp.constant.ErrorMessage;
 import com.mycompany.flashcardapp.model.Flashcard;
@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class FlashcardDAO {
-    private static final String FILE_NAME = "flashcards.dat";
+    private static final String FILE_NAME = "flashcards.bin";
 
     public FlashcardDAO() {
         FileDataManager.loadList(FILE_NAME);
@@ -29,7 +29,7 @@ public class FlashcardDAO {
 
     private String getTopicName(Integer topicId) {
         if (topicId == null) return "No Topic";
-        List<Topic> topics = FileDataManager.loadList("topics.dat");
+        List<Topic> topics = FileDataManager.loadList("topics.bin");
         return topics.stream()
                 .filter(t -> t.getId() == topicId)
                 .map(Topic::getName)

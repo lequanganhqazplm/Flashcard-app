@@ -1,4 +1,4 @@
-package com.mycompany.flashcardapp.database;
+package com.mycompany.flashcardapp.storage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;

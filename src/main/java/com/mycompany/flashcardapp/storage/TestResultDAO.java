@@ -1,4 +1,4 @@
-package com.mycompany.flashcardapp.database;
+package com.mycompany.flashcardapp.storage;
 
 import com.mycompany.flashcardapp.model.TestResult;
 
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class TestResultDAO {
-    private static final String FILE_NAME = "test_results.dat";
+    private static final String FILE_NAME = "test_results.bin";
 
     public TestResultDAO() {
         FileDataManager.loadList(FILE_NAME);
