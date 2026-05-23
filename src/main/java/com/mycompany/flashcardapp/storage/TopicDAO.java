@@ -58,6 +58,7 @@ public class TopicDAO {
         List<Topic> topics = getTopics();
         for (Topic t : topics) {
             if (t.getId() == topicId) {
+                if (t.getUserId() == 0) return false; // Block modifying global topics
                 t.setName(newName.trim());
                 saveTopics(topics);
                 return true;
@@ -83,7 +84,7 @@ public class TopicDAO {
 
         // Delete topic
         List<Topic> topics = getTopics();
-        boolean removed = topics.removeIf(t -> t.getId() == topicId);
+        boolean removed = topics.removeIf(t -> t.getId() == topicId && t.getUserId() != 0); // Block deleting global
         if (removed) {
             saveTopics(topics);
         }
@@ -93,7 +94,7 @@ public class TopicDAO {
     public List<Topic> getAllTopics(int userId) {
         List<Topic> topics = getTopics();
         return topics.stream()
-                .filter(t -> t.getUserId() == userId)
+                .filter(t -> t.getUserId() == userId || t.getUserId() == 0)
                 .map(t -> {
                     t.setFlashcardCount(getFlashcardCount(t.getId()));
                     return t;
@@ -105,7 +106,7 @@ public class TopicDAO {
     public Topic getTopicByName(int userId, String name) {
         List<Topic> topics = getTopics();
         return topics.stream()
-                .filter(t -> t.getUserId() == userId && t.getName().equals(name))
+                .filter(t -> (t.getUserId() == userId || t.getUserId() == 0) && t.getName().equals(name))
                 .map(t -> {
                     t.setFlashcardCount(getFlashcardCount(t.getId()));
                     return t;
@@ -116,6 +117,6 @@ public class TopicDAO {
 
     public boolean topicExists(int userId, String name) {
         List<Topic> topics = getTopics();
-        return topics.stream().anyMatch(t -> t.getUserId() == userId && t.getName().equals(name));
+        return topics.stream().anyMatch(t -> (t.getUserId() == userId || t.getUserId() == 0) && t.getName().equals(name));
     }
 }
