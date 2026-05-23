@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane style="-fx-background-color: transparent; -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.StatisticsUserController">
+<AnchorPane style="-fx-background-color: linear-gradient(to bottom right, #f0f4ff, #d9e2ff); -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.StatisticsUserController">
 
    <AnchorPane prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <children>
-         <Button fx:id="btnBack" layoutX="15.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBack" style="-fx-background-color: white; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;" text="← Trở về Dashboard" textFill="#4a5568">
+         <Button fx:id="btnBack" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: white; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;" text="← Quay lại" textFill="#4a5568">
             <font><Font name="System Bold" size="14.0" /></font>
          </Button>
       </children>
