@@ -3,104 +3,237 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="781.0" prefWidth="848.0" style="-fx-background-color: #f0f2f5;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.MainMenuController">
-    <children>
-        <VBox alignment="CENTER" maxHeight="800.0" maxWidth="520.0" minHeight="600.0" minWidth="350.0" prefWidth="400.0" spacing="30.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.12), 25, 0, 0, 6);" StackPane.alignment="CENTER">
-            <padding>
-                <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
-            </padding>
+<BorderPane prefHeight="768.0" prefWidth="1100.0" style="-fx-background-color: #F4F7F6; -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.MainMenuController">
+
+    <left>
+        <VBox prefWidth="250.0" style="-fx-background-color: #1A365D;" BorderPane.alignment="CENTER">
             <children>
-                <StackPane maxWidth="800.0" minWidth="523.0" prefHeight="220.0" prefWidth="460.0" style="-fx-background-color: #8E62A6; -fx-background-radius: 20 20 0 0;">
-                    <VBox.margin>
-                        <Insets top="-125.0" />
-                    </VBox.margin>
+                <HBox alignment="CENTER_LEFT" prefHeight="80.0" spacing="15.0" style="-fx-background-color: #11243E;">
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
                     <children>
-                        <VBox alignment="CENTER" spacing="10">
-                            <children>
-                                <Circle fill="WHITE" radius="60.0" stroke="WHITE" strokeType="INSIDE" style="-fx-fill: #EDE7F6;" />
-                                <Label fx:id="welcomeLabel" text="Xin chào!" textFill="WHITE">
-                                    <font>
-                                        <Font name="Times New Roman Bold" size="24.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                        </VBox>
+                        <Label text="📚" textFill="WHITE">
+                            <font>
+                                <Font size="28.0" />
+                            </font>
+                        </Label>
+                        <Label text="EngCards" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="22.0" />
+                            </font>
+                        </Label>
                     </children>
-                </StackPane>
-
-                <HBox alignment="CENTER" spacing="20.0">
-                    <children>
-                        <VBox fx:id="topicManagementBox" alignment="CENTER" onMouseClicked="#openVocabularyManagement" prefHeight="120.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: #4A90E2; -fx-background-radius: 15; -fx-cursor: hand;">
-                            <children>
-                                <Label text="Quản lý từ" textFill="WHITE">
-                                    <font>
-                                        <Font name="Times New Roman Bold" size="18.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                        <VBox fx:id="reviewBox" alignment="CENTER" onMouseClicked="#openStudyMode" prefHeight="120.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: #2ECC71; -fx-background-radius: 15; -fx-cursor: hand;">
-                            <children>
-                                <Label text="Ôn tập" textFill="WHITE">
-                                    <font>
-                                        <Font name="Times New Roman Bold" size="18.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                    </children>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
                 </HBox>
 
-                <HBox alignment="CENTER" spacing="20.0">
+                <VBox spacing="5.0">
+                    <padding>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="30.0" />
+                    </padding>
                     <children>
-                        <VBox fx:id="TestBox" alignment="CENTER" onMouseClicked="#openTestMode" prefHeight="120.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: #F5A623; -fx-background-radius: 15; -fx-cursor: hand;">
-                            <children>
-                                <Label text="Kiểm tra" textFill="WHITE">
-                                    <font>
-                                        <Font name="Times New Roman Bold" size="18.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                        <VBox fx:id="statisticsBox" alignment="CENTER" onMouseClicked="#openStatistics" prefHeight="120.0" prefWidth="200.0" spacing="10.0" style="-fx-background-color: #7B61FF; -fx-background-radius: 15; -fx-cursor: hand;">
-                            <children>
-                                <Label text="Thống kê" textFill="WHITE">
-                                    <font>
-                                        <Font name="Times New Roman Bold" size="18.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                    </children>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-                </HBox>
+                        <Label text="MENU CHÍNH" textFill="#8a9cba">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="10.0" left="10.0" />
+                            </VBox.margin>
+                        </Label>
 
-                <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogout" prefHeight="50.0" prefWidth="240.0" style="-fx-background-color: #E0E0E0; -fx-background-radius: 12; -fx-cursor: hand;" text="Đăng xuất">
-                    <font>
-                        <Font name="Times New Roman Bold" size="18.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets top="30.0" />
-                    </VBox.margin>
-                </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#openVocabularyManagement" prefHeight="45.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" text="📖  Quản lý từ vựng">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#openStudyMode" prefHeight="45.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" text="🔄  Ôn tập Flashcard">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#openTestMode" prefHeight="45.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" text="📝  Kiểm tra năng lực">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#openStatistics" prefHeight="45.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;" text="📊  Thống kê học tập">
+                            <font>
+                                <Font size="15.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <VBox>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogout" prefHeight="45.0" prefWidth="210.0" style="-fx-background-color: #314A6E; -fx-background-radius: 8; -fx-text-fill: white; -fx-cursor: hand;" text="🚪 Đăng xuất">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </VBox>
             </children>
         </VBox>
-    </children>
-    <padding>
-        <Insets bottom="30.0" left="60.0" right="60.0" top="30.0" />
-    </padding>
-</StackPane>
+    </left>
+
+    <center>
+        <BorderPane BorderPane.alignment="CENTER">
+
+            <top>
+                <HBox alignment="CENTER_RIGHT" prefHeight="70.0" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);" BorderPane.alignment="CENTER">
+                    <padding>
+                        <Insets left="30.0" right="30.0" />
+                    </padding>
+                    <children>
+                        <Region HBox.hgrow="ALWAYS" />
+
+                        <Label fx:id="welcomeLabel" text="Xin chào, lequanganhqazplm!" textFill="#2d3748">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets right="15.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Circle fill="#e2e8f0" radius="20.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                    </children>
+                </HBox>
+            </top>
+
+            <center>
+                <VBox spacing="30.0" BorderPane.alignment="CENTER">
+                    <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                    </padding>
+                    <children>
+
+                        <VBox prefHeight="120.0" style="-fx-background-color: linear-gradient(to right, #4A90E2, #7B61FF); -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(66,133,244,0.3), 15, 0, 0, 5);">
+                            <padding>
+                                <Insets bottom="25.0" left="30.0" right="30.0" top="25.0" />
+                            </padding>
+                            <children>
+                                <Label text="Hôm nay bạn muốn học gì?" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label text="Hãy duy trì thói quen ôn tập mỗi ngày để ghi nhớ từ vựng lâu hơn nhé!" textFill="#e2e8f0">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                    <VBox.margin>
+                                        <Insets top="10.0" />
+                                    </VBox.margin>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <Label text="Lối tắt (Quick Actions)" textFill="#4a5568">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+
+                        <GridPane hgap="25.0" vgap="25.0">
+                            <columnConstraints>
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                                <RowConstraints minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                            </rowConstraints>
+                            <children>
+
+                                <VBox fx:id="topicManagementBox" alignment="CENTER" onMouseClicked="#openVocabularyManagement" style="-fx-background-color: white; -fx-background-radius: 15; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 0, 4);" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                    <children>
+                                        <StackPane prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #EBF8FF; -fx-background-radius: 30;">
+                                            <Label text="📖" textFill="#3182ce">
+                                                <font><Font size="28.0" /></font>
+                                            </Label>
+                                        </StackPane>
+                                        <Label text="Quản lý từ" textFill="#2d3748">
+                                            <font>
+                                                <Font name="System Bold" size="20.0" />
+                                            </font>
+                                            <VBox.margin><Insets top="15.0" /></VBox.margin>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                                <VBox fx:id="reviewBox" alignment="CENTER" onMouseClicked="#openStudyMode" style="-fx-background-color: white; -fx-background-radius: 15; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 0, 4);" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                    <children>
+                                        <StackPane prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #F0FFF4; -fx-background-radius: 30;">
+                                            <Label text="🔄" textFill="#38a169">
+                                                <font><Font size="28.0" /></font>
+                                            </Label>
+                                        </StackPane>
+                                        <Label text="Ôn tập" textFill="#2d3748">
+                                            <font>
+                                                <Font name="System Bold" size="20.0" />
+                                            </font>
+                                            <VBox.margin><Insets top="15.0" /></VBox.margin>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                                <VBox fx:id="TestBox" alignment="CENTER" onMouseClicked="#openTestMode" style="-fx-background-color: white; -fx-background-radius: 15; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 0, 4);" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                    <children>
+                                        <StackPane prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #FFFAF0; -fx-background-radius: 30;">
+                                            <Label text="📝" textFill="#dd6b20">
+                                                <font><Font size="28.0" /></font>
+                                            </Label>
+                                        </StackPane>
+                                        <Label text="Kiểm tra" textFill="#2d3748">
+                                            <font>
+                                                <Font name="System Bold" size="20.0" />
+                                            </font>
+                                            <VBox.margin><Insets top="15.0" /></VBox.margin>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                                <VBox fx:id="statisticsBox" alignment="CENTER" onMouseClicked="#openStatistics" style="-fx-background-color: white; -fx-background-radius: 15; -fx-cursor: hand; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.08), 10, 0, 0, 4);" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <children>
+                                        <StackPane prefHeight="60.0" prefWidth="60.0" style="-fx-background-color: #FAF5FF; -fx-background-radius: 30;">
+                                            <Label text="📊" textFill="#805ad5">
+                                                <font><Font size="28.0" /></font>
+                                            </Label>
+                                        </StackPane>
+                                        <Label text="Thống kê" textFill="#2d3748">
+                                            <font>
+                                                <Font name="System Bold" size="20.0" />
+                                            </font>
+                                            <VBox.margin><Insets top="15.0" /></VBox.margin>
+                                        </Label>
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </GridPane>
+
+                    </children>
+                </VBox>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>
