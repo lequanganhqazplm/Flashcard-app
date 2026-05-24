@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane prefHeight="738.0" prefWidth="760.0" style="-fx-background-color: transparent; -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.ReviewTopicController">
+<StackPane prefHeight="738.0" prefWidth="760.0" style="-fx-background-color: linear-gradient(to bottom right, #f0f4ff, #d9e2ff); -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.ReviewTopicController">
    <children>
-      <VBox alignment="CENTER" maxWidth="600.0" minWidth="400.0" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 15, 0, 0, 4);" StackPane.alignment="CENTER">
+      <VBox alignment="CENTER" maxWidth="900.0" minWidth="400.0" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 15, 0, 0, 4);" StackPane.alignment="CENTER">
          <padding>
             <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
          </padding>
@@ -37,17 +37,15 @@
                </children>
             </StackPane>
 
-            <HBox alignment="CENTER_LEFT">
-               <children>
-                  <Button fx:id="backButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: #e2e8f0; -fx-text-fill: #4a5568; -fx-background-radius: 8; -fx-cursor: hand;" text="← Quay lại">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+
          </children>
       </VBox>
+      <Button fx:id="backButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: white; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-background-radius: 8; -fx-cursor: hand;" text="← Quay lại" textFill="#4a5568" StackPane.alignment="TOP_LEFT">
+         <font><Font name="System Bold" size="14.0" /></font>
+         <StackPane.margin>
+            <Insets left="20.0" top="20.0" />
+         </StackPane.margin>
+      </Button>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

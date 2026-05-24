@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import com.mycompany.flashcardapp.storage.DefaultDataSeeder;
 
 /**
  *
@@ -23,8 +24,8 @@ public class MyFlashcardApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
-            // Khởi tạo dữ liệu mặc định (Global Seed Data) nếu chưa có
-            com.mycompany.flashcardapp.storage.DefaultDataSeeder.seed();
+            // Tự động sinh dữ liệu mặc định nếu chưa có
+            DefaultDataSeeder.seed();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Welcome.fxml"));
             Parent root = loader.load();
@@ -40,7 +41,7 @@ public class MyFlashcardApp extends Application {
 
             System.out.println("Mở application thành công");
         } catch (Exception e) {
-            System.err.println("Mở application thất bại");
+            System.err.println("Mở application thâ bại");
             e.printStackTrace();
         }
     }

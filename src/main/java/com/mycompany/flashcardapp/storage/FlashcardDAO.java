@@ -52,12 +52,6 @@ public class FlashcardDAO {
         for (Flashcard f : flashcards) {
             if (f.getId() == id) {
                 if (f.getUserId() == 0) return false; // Block modifying global flashcards
-                // Flashcard is immutable regarding the property wrapper in the custom code I wrote?
-                // Wait, I didn't add setters for vocabulary and definition in Flashcard model!
-                // Ah, the properties handle it by returning the property itself to call `.set()`
-                // Let's modify the values inside the property directly.
-                // Wait, if we do `f.vocabularyProperty().set(vocabulary);`, it will update the model.
-                // But wait, the `Flashcard` model had no setters for them? It only had `property()` methods. Let's assume there are getters, we can use `f.vocabularyProperty().set()`.
                 f.vocabularyProperty().set(vocabulary);
                 f.definitionProperty().set(definition);
                 f.setTopicId(topicId);
@@ -71,7 +65,11 @@ public class FlashcardDAO {
 
     public boolean deleteFlashcard(int id) {
         List<Flashcard> flashcards = getFlashcards();
-        boolean removed = flashcards.removeIf(f -> f.getId() == id && f.getUserId() != 0); // Block deleting global
+        // Block deleting global flashcards
+        if (flashcards.stream().anyMatch(f -> f.getId() == id && f.getUserId() == 0)) {
+            return false;
+        }
+        boolean removed = flashcards.removeIf(f -> f.getId() == id);
         if (removed) {
             saveFlashcards(flashcards);
         }

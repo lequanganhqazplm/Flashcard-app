@@ -9,77 +9,78 @@ public class DefaultDataSeeder {
         TopicDAO topicDAO = new TopicDAO();
         FlashcardDAO flashcardDAO = new FlashcardDAO();
 
-        // Kiểm tra xem đã có topic global nào chưa (userId = 0)
+        // Kiểm tra xem đã có dữ liệu global chưa (userId = 0)
         List<Topic> globalTopics = topicDAO.getAllTopics(0);
-        if (!globalTopics.isEmpty()) {
-            return; // Nếu có rồi thì không sinh nữa để tránh lặp
+        if (globalTopics != null && !globalTopics.isEmpty()) {
+            return; // Nếu đã có rồi thì nghỉ, không đẻ thêm
         }
 
-        System.out.println("Đang tự động sinh dữ liệu toàn cục (Global Seed Data)...");
+        // Tạo 3 chủ đề mặc định
+        topicDAO.addTopic(0, "Giao tiếp Tiếng Anh Cơ Bản");
+        topicDAO.addTopic(0, "Từ vựng IELTS - Chủ đề Work");
+        topicDAO.addTopic(0, "Từ vựng TOEIC - Office");
 
-        // Tạo 3 Topics
-        topicDAO.addTopic(0, "Từ vựng IT cơ bản");
-        topicDAO.addTopic(0, "Động từ bất quy tắc");
-        topicDAO.addTopic(0, "Tiếng Anh giao tiếp");
+        List<Topic> newlyCreated = topicDAO.getAllTopics(0);
+        if (newlyCreated.size() < 3) return; // fail safe
 
-        Topic topicIT = topicDAO.getTopicByName(0, "Từ vựng IT cơ bản");
-        Topic topicVerbs = topicDAO.getTopicByName(0, "Động từ bất quy tắc");
-        Topic topicDaily = topicDAO.getTopicByName(0, "Tiếng Anh giao tiếp");
+        int topic1 = newlyCreated.get(0).getId();
+        int topic2 = newlyCreated.get(1).getId();
+        int topic3 = newlyCreated.get(2).getId();
 
-        // 1. 50 Từ vựng IT
-        String[] itWords = {
-            "Algorithm|Thuật toán", "API|Giao diện lập trình ứng dụng", "Array|Mảng", "Bandwidth|Băng thông", "Binary|Nhị phân",
-            "Bit|Đơn vị dữ liệu nhỏ nhất", "Bug|Lỗi phần mềm", "Byte|Đơn vị lưu trữ (8 bits)", "Cache|Bộ nhớ đệm", "Cloud|Đám mây",
-            "Code|Mã nguồn", "Compiler|Trình biên dịch", "Database|Cơ sở dữ liệu", "Debug|Gỡ lỗi", "Deploy|Triển khai",
-            "Domain|Tên miền", "Encryption|Mã hóa", "Endpoint|Điểm cuối (API)", "Ethernet|Mạng cục bộ", "Firewall|Tường lửa",
-            "Framework|Khung phần mềm", "Frontend|Giao diện người dùng", "Backend|Hệ thống máy chủ", "Gateway|Cổng kết nối", "Hardware|Phần cứng",
-            "Software|Phần mềm", "Hosting|Lưu trữ web", "HTML|Ngôn ngữ đánh dấu siêu văn bản", "HTTP|Giao thức truyền siêu văn bản", "IP|Địa chỉ mạng",
-            "Iterate|Lặp lại", "JSON|Định dạng dữ liệu nhẹ", "Kernel|Nhân hệ điều hành", "Latency|Độ trễ", "Linux|Hệ điều hành mã nguồn mở",
-            "Loop|Vòng lặp", "Malware|Phần mềm độc hại", "Network|Mạng lưới", "Node|Nút mạng", "OS|Hệ điều hành",
-            "Packet|Gói dữ liệu", "Parameter|Tham số", "Password|Mật khẩu", "Phishing|Tấn công lừa đảo", "Ping|Kiểm tra kết nối",
-            "Protocol|Giao thức", "Query|Truy vấn", "Repository|Kho chứa mã", "Router|Bộ định tuyến", "Server|Máy chủ"
+        // 50 từ vựng cho topic 1: Giao tiếp Cơ Bản
+        String[] data1 = {
+            "Hello|Xin chào", "Goodbye|Tạm biệt", "Thanks|Cảm ơn", "Sorry|Xin lỗi", "Please|Vui lòng",
+            "Yes|Có, vâng", "No|Không", "Maybe|Có lẽ", "Help|Giúp đỡ", "Love|Tình yêu",
+            "Family|Gia đình", "Friend|Bạn bè", "Food|Thức ăn", "Water|Nước", "Money|Tiền bạc",
+            "Time|Thời gian", "Day|Ngày", "Night|Đêm", "Morning|Buổi sáng", "Evening|Buổi tối",
+            "Happy|Vui vẻ", "Sad|Buồn bã", "Angry|Tức giận", "Tired|Mệt mỏi", "Hungry|Đói bụng",
+            "Beautiful|Xinh đẹp", "Ugly|Xấu xí", "Big|To lớn", "Small|Nhỏ bé", "Fast|Nhanh",
+            "Slow|Chậm chạp", "Hot|Nóng bức", "Cold|Lạnh giá", "Good|Tốt", "Bad|Xấu",
+            "Easy|Dễ dàng", "Hard|Khó khăn", "Right|Đúng", "Wrong|Sai", "New|Mới",
+            "Old|Cũ", "High|Cao", "Low|Thấp", "Long|Dài", "Short|Ngắn",
+            "Buy|Mua", "Sell|Bán", "Open|Mở", "Close|Đóng", "Go|Đi"
         };
-        for (String pair : itWords) {
+        for (String pair : data1) {
             String[] parts = pair.split("\\|");
-            flashcardDAO.addFlashcard(0, parts[0], parts[1], topicIT.getId());
+            flashcardDAO.addFlashcard(0, parts[0], parts[1], topic1);
         }
 
-        // 2. 50 Động từ bất quy tắc
-        String[] verbs = {
-            "Be - Was/Were - Been|Thì, là, ở", "Beat - Beat - Beaten|Đánh", "Become - Became - Become|Trở nên", "Begin - Began - Begun|Bắt đầu", "Bite - Bit - Bitten|Cắn",
-            "Blow - Blew - Blown|Thổi", "Break - Broke - Broken|Làm vỡ", "Bring - Brought - Brought|Mang đến", "Build - Built - Built|Xây dựng", "Buy - Bought - Bought|Mua",
-            "Catch - Caught - Caught|Bắt lấy", "Choose - Chose - Chosen|Chọn lựa", "Come - Came - Come|Đến", "Cost - Cost - Cost|Có giá là", "Cut - Cut - Cut|Cắt",
-            "Do - Did - Done|Làm", "Draw - Drew - Drawn|Vẽ", "Drink - Drank - Drunk|Uống", "Drive - Drove - Driven|Lái xe", "Eat - Ate - Eaten|Ăn",
-            "Fall - Fell - Fallen|Ngã", "Feel - Felt - Felt|Cảm thấy", "Fight - Fought - Fought|Chiến đấu", "Find - Found - Found|Tìm thấy", "Fly - Flew - Flown|Bay",
-            "Forget - Forgot - Forgotten|Quên", "Forgive - Forgave - Forgiven|Tha thứ", "Freeze - Froze - Frozen|Đóng băng", "Get - Got - Got/Gotten|Có được", "Give - Gave - Given|Cho",
-            "Go - Went - Gone|Đi", "Grow - Grew - Grown|Mọc, trồng", "Have - Had - Had|Có", "Hear - Heard - Heard|Nghe", "Hide - Hid - Hidden|Giấu",
-            "Hit - Hit - Hit|Đánh", "Hold - Held - Held|Giữ", "Hurt - Hurt - Hurt|Làm đau", "Keep - Kept - Kept|Giữ", "Know - Knew - Known|Biết",
-            "Leave - Left - Left|Rời đi", "Lend - Lent - Lent|Cho mượn", "Let - Let - Let|Cho phép", "Lose - Lost - Lost|Làm mất", "Make - Made - Made|Làm, chế tạo",
-            "Meet - Met - Met|Gặp gỡ", "Pay - Paid - Paid|Trả tiền", "Put - Put - Put|Đặt, để", "Read - Read - Read|Đọc", "Ride - Rode - Ridden|Cưỡi, lái"
+        // 50 từ vựng cho topic 2: IELTS Work
+        String[] data2 = {
+            "Colleague|Đồng nghiệp", "Career|Sự nghiệp", "Promotion|Thăng tiến", "Salary|Mức lương", "Interview|Phỏng vấn",
+            "Candidate|Ứng viên", "Employer|Người sử dụng lao động", "Employee|Người lao động", "Resume|Sơ yếu lý lịch", "Qualification|Bằng cấp",
+            "Skill|Kỹ năng", "Experience|Kinh nghiệm", "Requirement|Yêu cầu", "Deadline|Hạn chót", "Project|Dự án",
+            "Task|Nhiệm vụ", "Responsibility|Trách nhiệm", "Meeting|Cuộc họp", "Presentation|Bài thuyết trình", "Report|Báo cáo",
+            "Strategy|Chiến lược", "Goal|Mục tiêu", "Achievement|Thành tựu", "Success|Thành công", "Failure|Thất bại",
+            "Challenge|Thử thách", "Opportunity|Cơ hội", "Motivation|Động lực", "Productivity|Năng suất", "Efficiency|Hiệu quả",
+            "Teamwork|Làm việc nhóm", "Leadership|Lãnh đạo", "Management|Quản lý", "Communication|Giao tiếp", "Negotiation|Đàm phán",
+            "Conflict|Xung đột", "Resolution|Giải pháp", "Agreement|Thỏa thuận", "Contract|Hợp đồng", "Signature|Chữ ký",
+            "Resign|Từ chức", "Retire|Nghỉ hưu", "Dismiss|Sa thải", "Hire|Thuê mướn", "Recruit|Tuyển dụng",
+            "Workspace|Không gian làm việc", "Office|Văn phòng", "Equipment|Thiết bị", "Technology|Công nghệ", "Innovation|Sự đổi mới"
         };
-        for (String pair : verbs) {
+        for (String pair : data2) {
             String[] parts = pair.split("\\|");
-            flashcardDAO.addFlashcard(0, parts[0], parts[1], topicVerbs.getId());
+            flashcardDAO.addFlashcard(0, parts[0], parts[1], topic2);
         }
 
-        // 3. 50 Tiếng Anh giao tiếp
-        String[] daily = {
-            "Hello|Xin chào", "Good morning|Chào buổi sáng", "Good afternoon|Chào buổi chiều", "Good evening|Chào buổi tối", "Good night|Chúc ngủ ngon",
-            "How are you?|Bạn khỏe không?", "I'm fine, thank you|Tôi khỏe, cảm ơn", "And you?|Còn bạn thì sao?", "What is your name?|Bạn tên gì?", "My name is...|Tên tôi là...",
-            "Nice to meet you|Rất vui được gặp bạn", "Where are you from?|Bạn từ đâu đến?", "I'm from...|Tôi đến từ...", "How old are you?|Bạn bao nhiêu tuổi?", "I am... years old|Tôi... tuổi",
-            "Do you speak English?|Bạn có nói tiếng Anh không?", "Yes, a little|Có, một chút", "No, I don't|Không, tôi không", "I don't understand|Tôi không hiểu", "Please say that again|Vui lòng nói lại lần nữa",
-            "Can you speak slower?|Bạn có thể nói chậm hơn được không?", "What does this mean?|Cái này có nghĩa là gì?", "How much is this?|Cái này giá bao nhiêu?", "I would like...|Tôi muốn...", "Excuse me|Xin lỗi (khi muốn hỏi/làm phiền)",
-            "I'm sorry|Tôi xin lỗi", "Thank you|Cảm ơn", "You're welcome|Không có chi", "Yes, please|Vâng, vui lòng", "No, thank you|Không, cảm ơn",
-            "Where is the restroom?|Nhà vệ sinh ở đâu?", "I need help|Tôi cần giúp đỡ", "Call the police|Gọi cảnh sát", "Call an ambulance|Gọi xe cứu thương", "I'm lost|Tôi bị lạc",
-            "What time is it?|Bây giờ là mấy giờ?", "It is... o'clock|Bây giờ là... giờ", "Today is...|Hôm nay là...", "Yesterday|Hôm qua", "Tomorrow|Ngày mai",
-            "Monday|Thứ Hai", "Tuesday|Thứ Ba", "Wednesday|Thứ Tư", "Thursday|Thứ Năm", "Friday|Thứ Sáu",
-            "Saturday|Thứ Bảy", "Sunday|Chủ Nhật", "See you later|Hẹn gặp lại sau", "See you tomorrow|Hẹn gặp lại ngày mai", "Goodbye|Tạm biệt"
+        // 50 từ vựng cho topic 3: TOEIC Office
+        String[] data3 = {
+            "Document|Tài liệu", "Folder|Thư mục", "File|Tệp tin", "Attachment|Tệp đính kèm", "Email|Thư điện tử",
+            "Printer|Máy in", "Copier|Máy photocopy", "Scanner|Máy quét", "Shredder|Máy hủy tài liệu", "Stationery|Văn phòng phẩm",
+            "Pen|Bút", "Pencil|Bút chì", "Paper|Giấy", "Notebook|Sổ tay", "Calendar|Lịch",
+            "Schedule|Lịch trình", "Appointment|Cuộc hẹn", "Memo|Bản ghi nhớ", "Notice|Thông báo", "Bulletin board|Bảng thông báo",
+            "Reception|Quầy lễ tân", "Lobby|Sảnh", "Elevator|Thang máy", "Stairs|Cầu thang", "Cafeteria|Quán ăn tự phục vụ",
+            "Restroom|Nhà vệ sinh", "Conference room|Phòng họp", "Boardroom|Phòng họp ban quản trị", "Desk|Bàn làm việc", "Chair|Ghế",
+            "Computer|Máy tính", "Monitor|Màn hình", "Keyboard|Bàn phím", "Mouse|Chuột", "Telephone|Điện thoại",
+            "Extension|Số máy lẻ", "Message|Tin nhắn", "Voicemail|Hộp thư thoại", "Directory|Danh bạ", "Department|Phòng ban",
+            "Manager|Người quản lý", "Supervisor|Người giám sát", "Assistant|Trợ lý", "Secretary|Thư ký", "Client|Khách hàng",
+            "Customer|Khách hàng (mua hàng)", "Supplier|Nhà cung cấp", "Vendor|Người bán hàng", "Invoice|Hóa đơn", "Receipt|Biên lai"
         };
-        for (String pair : daily) {
+        for (String pair : data3) {
             String[] parts = pair.split("\\|");
-            flashcardDAO.addFlashcard(0, parts[0], parts[1], topicDaily.getId());
+            flashcardDAO.addFlashcard(0, parts[0], parts[1], topic3);
         }
 
-        System.out.println("Khởi tạo xong Dữ liệu Toàn cục! (3 Topics, 150 Flashcards)");
+        System.out.println("Default seed data created successfully.");
     }
 }
