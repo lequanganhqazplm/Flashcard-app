@@ -53,7 +53,7 @@ public class AddTopicController {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setMaximized(false);
             stage.setScene(new Scene(root, 1280, 720));
-            stage.setTitle("Flashcard Learning - Quản lý từ vựng");
+            stage.setTitle("FlashcardAH - Quản lý từ vựng");
             stage.setMaximized(true);
             stage.show();
         } catch (Exception e) {

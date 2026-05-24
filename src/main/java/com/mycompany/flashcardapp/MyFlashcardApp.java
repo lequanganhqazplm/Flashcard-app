@@ -33,7 +33,7 @@ public class MyFlashcardApp extends Application {
             Scene scene = new Scene(root);
 
             // Configure the stage
-            stage.setTitle("Flashcard Learning - Welcome");
+            stage.setTitle("FlashcardAH - Welcome");
             stage.setScene(scene);
             stage.setMaximized(true);
             stage.centerOnScreen();
