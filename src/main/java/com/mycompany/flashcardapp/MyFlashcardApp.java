@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import com.mycompany.flashcardapp.storage.DefaultDataSeeder;
 
 /**
  *
@@ -23,13 +24,16 @@ public class MyFlashcardApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         try {
+            // Tự động sinh dữ liệu mặc định nếu chưa có
+            DefaultDataSeeder.seed();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/Welcome.fxml"));
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
 
             // Configure the stage
-            stage.setTitle("Flashcard Learning - Welcome");
+            stage.setTitle("FlashcardAH - Welcome");
             stage.setScene(scene);
             stage.setMaximized(true);
             stage.centerOnScreen();
