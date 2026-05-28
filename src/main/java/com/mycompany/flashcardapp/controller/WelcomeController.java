@@ -17,7 +17,7 @@ public class WelcomeController {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setMaximized(false);
             stage.setScene(new Scene(root, 1280, 720));
-            stage.setTitle("Flashcard Learning - Đăng nhập");
+            stage.setTitle("FlashcardAH - Đăng nhập");
             stage.setMaximized(true);
             stage.show();
 
@@ -37,7 +37,7 @@ public class WelcomeController {
             Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
             stage.setMaximized(false);
             stage.setScene(new Scene(root, 1280, 720));
-            stage.setTitle("Flashcard Learning - Đăng ký");
+            stage.setTitle("FlashcardAH - Đăng ký");
             stage.setMaximized(true);
             stage.show();
 

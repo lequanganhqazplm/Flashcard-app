@@ -177,7 +177,7 @@ public class StatisticsUserController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setMaximized(false);
             stage.setScene(new Scene(root, 1280, 720));
-            stage.setTitle("Flashcard Learning - Menu chính");
+            stage.setTitle("FlashcardAH - Menu chính");
             stage.setMaximized(true);
             stage.show();
         } catch (IOException e) {

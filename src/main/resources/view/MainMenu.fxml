@@ -13,6 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <BorderPane prefHeight="768.0" prefWidth="1100.0" style="-fx-background-color: #F4F7F6; -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.MainMenuController">
 
@@ -29,7 +31,7 @@
                                 <Font size="28.0" />
                             </font>
                         </Label>
-                        <Label text="EngCards" textFill="WHITE">
+                        <Label text="FlashcardAH" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="22.0" />
                             </font>
@@ -111,7 +113,11 @@
                                 <Insets right="15.0" />
                             </HBox.margin>
                         </Label>
-                        <Circle fill="#e2e8f0" radius="20.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@avt.png" />
+                            </image>
+                        </ImageView>
                     </children>
                 </HBox>
             </top>

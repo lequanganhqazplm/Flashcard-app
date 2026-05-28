@@ -21,7 +21,7 @@
                         <Label text="📚" textFill="#1a365d">
                             <font><Font size="60.0" /></font>
                         </Label>
-                        <Label text="EngCards" textFill="#1A365D">
+                        <Label text="FlashcardAH" textFill="#1A365D">
                             <font>
                                 <Font name="System Bold" size="32.0" />
                             </font>

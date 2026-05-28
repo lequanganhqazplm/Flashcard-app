@@ -53,7 +53,7 @@ public class MainMenuController {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setMaximized(false);
             stage.setScene(new Scene(root, 1280, 720));
-            stage.setTitle("Flashcard Learning - Welcome");
+            stage.setTitle("FlashcardAH - Welcome");
             stage.setMaximized(true);
             stage.show();
         } catch (IOException e) {
@@ -64,25 +64,25 @@ public class MainMenuController {
 
     @FXML
     void openVocabularyManagement(MouseEvent event) {
-        navigate(event, "/view/VocabularyManagement.fxml", "Flashcard Learning - Quản lý từ vựng");
+        navigate(event, "/view/VocabularyManagement.fxml", "FlashcardAH - Quản lý từ vựng");
     }
 
     // --- CHỈNH SỬA Ở ĐÂY ---
     @FXML
     void openStudyMode(MouseEvent event) {
         // Chuyển hướng sang màn hình Chọn Topic để ôn tập (ReviewByTopic)
-        navigate(event, "/view/ReviewByTopic.fxml", "Flashcard Learning - Chọn chủ đề ôn tập");
+        navigate(event, "/view/ReviewByTopic.fxml", "FlashcardAH - Chọn chủ đề ôn tập");
     }
     // -----------------------
 
     @FXML
     void openTestMode(MouseEvent event) {
-        navigate(event, "/view/TestModeMenu.fxml", "Flashcard Learning - Kiểm tra");
+        navigate(event, "/view/TestModeMenu.fxml", "FlashcardAH - Kiểm tra");
     }
 
     @FXML
     void openStatistics(MouseEvent event) {
-        navigate(event, "/view/StatisticsUser.fxml", "Flashcard Learning - Thống kê");
+        navigate(event, "/view/StatisticsUser.fxml", "FlashcardAH - Thống kê");
     }
 
     // Hàm hỗ trợ chuyển cảnh để code gọn hơn

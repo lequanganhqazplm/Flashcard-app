@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: transparent; -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.MainMenuController">
+<BorderPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom right, #f0f4ff, #d9e2ff); -fx-font-family: 'Segoe UI', Arial, sans-serif;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.flashcardapp.controller.MainMenuController">
     <top>
         <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 30;">
             <children>
-                <Button onAction="#backToMainMenu" style="-fx-background-color: white; -fx-text-fill: #4a5568; -fx-background-radius: 8; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-cursor: hand;" text="← Trở về">
+                <Button onAction="#backToMainMenu" prefHeight="40.0" prefWidth="120.0" style="-fx-background-color: white; -fx-text-fill: #4a5568; -fx-background-radius: 8; -fx-border-color: #e2e8f0; -fx-border-radius: 8; -fx-cursor: hand;" text="← Quay lại">
                     <font> <Font name="System Bold" size="14.0" /> </font>
                 </Button>
                 <Region HBox.hgrow="ALWAYS" />
@@ -25,6 +25,14 @@
         </HBox>
     </top>
 
+    <center>
+        <VBox alignment="CENTER" maxWidth="1100.0" prefWidth="700.0" spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 15, 0, 0, 4);" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="timerDisplayLabel" style="-fx-font-size: 32; -fx-font-weight: bold; -fx-text-fill: #E53E3E;" text="05:00" />
+                <Label style="-fx-text-fill: #A0AEC0;" text="⏱ Tự động lật thẻ sau 5 phút" />
+            </children>
+        </VBox>
+    </center>
     <center>
         <VBox alignment="CENTER" spacing="30" style="-fx-padding: 20;">
             <children>
