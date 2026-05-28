@@ -1,6 +1,5 @@
 package com.mycompany.flashcardapp.storage;
 
-import com.mycompany.flashcardapp.constant.ErrorMessage;
 import com.mycompany.flashcardapp.model.Flashcard;
 import com.mycompany.flashcardapp.model.Topic;
 
